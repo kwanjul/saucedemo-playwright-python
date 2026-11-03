@@ -1,6 +1,12 @@
 # saucedemo-playwright-python
 Playwright Python test automation framework for Sauce Demo
 
+## Test Reports
+
+View the latest automated test results:
+
+[![Playwright Python Tests](https://github.com/kwanjul/saucedemo-playwright-python/actions/workflows/playwright-tests.yml/badge.svg)](https://github.com/kwanjul/saucedemo-playwright-python/actions/workflows/playwright-tests.yml)
+
 ## Getting started
 
 This starter test logs in to Sauce Demo with its standard demo account and
