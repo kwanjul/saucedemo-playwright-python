@@ -1,0 +1,50 @@
+name: Playwright Python Tests
+
+'on':
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: '0 8 * * 1-5'
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+
+      - name: Install Playwright Chromium
+        run: python -m playwright install --with-deps chromium
+
+      - name: Run pytest tests
+        run: |
+          mkdir -p test-results
+          python -m pytest --browser chromium --tracing retain-on-failure --screenshot only-on-failure --output test-results --junitxml=test-results/pytest-results.xml
+
+      - name: Upload test results and failure artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-python-test-results
+          path: test-results/
+          if-no-files-found: warn
+          retention-days: 14
