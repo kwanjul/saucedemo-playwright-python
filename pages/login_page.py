@@ -1,4 +1,5 @@
 from playwright.sync_api import Page
+from config import BASE_URL
 
 class LoginPage:
 
@@ -15,4 +16,4 @@ class LoginPage:
         self.login_button.click()
 
     def navigate(self) -> None:
-        self.page.goto("https://www.saucedemo.com/")
+        self.page.goto(BASE_URL)

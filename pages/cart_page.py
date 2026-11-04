@@ -1,4 +1,4 @@
-from playwright.sync_api import Page
+from playwright.sync_api import Page, Locator
 
 class CartPage:
 
@@ -9,8 +9,8 @@ class CartPage:
         self.checkout_button = self.page.get_by_role("button", name="Checkout")
         self.cart_badge = self.page.locator(".shopping_cart_badge")
 
-    def get_cart_item_count(self) -> int:
-        return self.page.locator(".inventory_item_name").count()
+    def get_cart_items(self) -> Locator:
+        return self.page.locator(".cart_item")
 
     def get_cart_product_names(self) -> list[str]:
         return self.page.locator(".inventory_item_name").all_text_contents()
