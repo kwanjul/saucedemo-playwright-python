@@ -48,3 +48,13 @@ jobs:
           path: test-results/
           if-no-files-found: warn
           retention-days: 14
+
+      - name: Upload HTML report
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: playwright-python-html-report
+          path: reports/report.html
+          if-no-files-found: error
+          retention-days: 14
+          
