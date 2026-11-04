@@ -26,3 +26,9 @@ class InventoryPage:
 
     def remove_product_from_cart(self, product_name: str) -> None:
         self.page.locator(".inventory_item").filter(has_text=product_name).get_by_role("button", name="Remove").click()
+
+    def open_cart(self) -> None:
+        self.page.get_by_test_id("shopping-cart-link").click()
+
+    def open_product_details(self, product_name: str) -> None:
+        self.page.get_by_text(product_name, exact=True).click()
