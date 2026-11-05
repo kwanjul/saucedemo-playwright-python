@@ -20,6 +20,20 @@ View the latest GitHub Actions workflow status and access downloadable test repo
 
 [View Latest HTML Test Report](https://kwanjul.github.io/saucedemo-playwright-python/)
 
+## Technology Stack
+
+| Technology | Purpose |
+|---|---|
+| **Python 3.12** | Primary programming language for test automation |
+| **Playwright for Python** | Browser automation and UI interaction |
+| **pytest** | Test execution, assertions, fixtures, and test organization |
+| **pytest-playwright** | Integration between Playwright and pytest |
+| **Page Object Model (POM)** | Design pattern for reusable page components and separation of test logic |
+| **pytest-html** | Generation of HTML test execution reports |
+| **GitHub Actions** | CI/CD automation, scheduled test execution, and artifact collection |
+| **GitHub Pages** | Hosting of the latest publicly accessible HTML test report |
+| **Git** | Source control and version management |
+
 ## Test Coverage
 
 The framework currently contains **19 automated tests** across five functional areas:
