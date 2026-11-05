@@ -1,3 +1,4 @@
+
 name: Playwright Python Tests
 
 'on':
@@ -11,6 +12,12 @@ name: Playwright Python Tests
 
 permissions:
   contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: playwright-python-pages
+  cancel-in-progress: false
 
 jobs:
   test:
@@ -57,4 +64,46 @@ jobs:
           path: reports/report.html
           if-no-files-found: error
           retention-days: 14
-          
+
+      - name: Prepare GitHub Pages report
+        if: always() && github.event_name != 'pull_request'
+        env:
+          TZ: America/New_York
+        run: |
+          mkdir -p pages
+
+          if [ -f reports/report.html ]; then
+            cp reports/report.html pages/index.html
+
+            RUN_DATE=$(date '+%B %d, %Y at %I:%M %p %Z')
+
+            python3 - "$RUN_DATE" <<'PY'
+          import sys
+          from pathlib import Path
+          from html import escape
+
+          report = Path("pages/index.html")
+          html = report.read_text(encoding="utf-8")
+          timestamp = escape(sys.argv[1])
+
+          html = html.replace(
+              '<h1 id="title">report.html</h1>',
+              f'<h1 id="title">Playwright Python Test Report</h1><p><strong>Last run:</strong> {timestamp}</p>',
+              1
+          )
+
+          report.write_text(html, encoding="utf-8")
+          PY
+          else
+            echo "<h1>Test report unavailable</h1>" > pages/index.html
+          fi
+
+      - name: Upload GitHub Pages artifact
+        if: always() && github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: pages/
+
+      - name: Deploy to GitHub Pages
+        if: always() && github.event_name != 'pull_request'
+        uses: actions/deploy-pages@v5

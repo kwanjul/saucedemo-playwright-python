@@ -18,6 +18,8 @@ View the latest GitHub Actions workflow status and access downloadable test repo
 
 [![Playwright Python Tests](https://github.com/kwanjul/saucedemo-playwright-python/actions/workflows/playwright-tests.yml/badge.svg)](https://github.com/kwanjul/saucedemo-playwright-python/actions/workflows/playwright-tests.yml)
 
+[View Latest HTML Test Report](https://kwanjul.github.io/saucedemo-playwright-python/)
+
 ## Test Coverage
 
 The framework currently contains **19 automated tests** across five functional areas:
