@@ -3,6 +3,9 @@ from pages.inventory_page import InventoryPage
 from pages.product_details import ProductDetailsPage
 from urllib.parse import urljoin
 from config import BASE_URL
+import pytest
+
+pytestmark = pytest.mark.regression
 
 def test_product_details_displayed_correctly(logged_in_page: Page) -> None:
     inventory_page = InventoryPage(logged_in_page)

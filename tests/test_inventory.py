@@ -1,6 +1,10 @@
 from playwright.sync_api import expect, Page
 from pages.inventory_page import InventoryPage
+import pytest
 
+pytestmark = pytest.mark.regression
+
+@pytest.mark.smoke
 def test_inventory_page_loads(logged_in_page: Page) -> None:
     inventory_page = InventoryPage(logged_in_page)
     expect(inventory_page.get_inventory_items()).to_have_count(6)
@@ -50,6 +54,7 @@ def test_sort_products_by_price(logged_in_page: Page) -> None:
     inventory_page.sort_products("Price (low to high)")
     expect(actual_prices).to_have_text([f"${price:.2f}" for price in sorted(expected_prices)])
 
+@pytest.mark.smoke
 def test_add_product_to_cart(logged_in_page: Page) -> None:
     inventory_page = InventoryPage(logged_in_page)
     expect(inventory_page.products_header).to_be_visible()

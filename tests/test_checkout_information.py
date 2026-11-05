@@ -2,7 +2,11 @@ from playwright.sync_api import expect, Page
 from pages.checkout_information_page import CheckoutInformationPage
 from urllib.parse import urljoin
 from config import BASE_URL
+import pytest
 
+pytestmark = pytest.mark.regression
+
+@pytest.mark.smoke
 def test_checkout_with_valid_information(
     logged_in_page: Page,
     checkout_information_page: CheckoutInformationPage
