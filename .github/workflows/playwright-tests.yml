@@ -49,7 +49,7 @@ jobs:
 
       - name: Upload test results and failure artifacts
         if: always()
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: playwright-python-test-results
           path: test-results/
@@ -58,7 +58,7 @@ jobs:
 
       - name: Upload HTML report
         if: always()
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: playwright-python-html-report
           path: reports/report.html
