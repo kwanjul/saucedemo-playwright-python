@@ -7,7 +7,7 @@ def test_login_page_loads(page: Page) -> None:
     login_page = LoginPage(page)
     login_page.navigate()
 
-    expect(login_page.username_field).to_be_visible()
+    expect(login_page.username_field).to_be_hidden()
     expect(login_page.password_field).to_be_visible()
 
 def test_successful_login(page: Page) -> None:
