@@ -4,6 +4,7 @@ from pages.login_page import LoginPage
 from pages.inventory_page import InventoryPage
 from pages.cart_page import CartPage
 from pages.checkout_information_page import CheckoutInformationPage
+from pages.checkout_overview_page import CheckoutOverviewPage
 from config import STANDARD_USERNAME, STANDARD_PASSWORD
 
 @pytest.fixture(scope="session", autouse=True)
@@ -34,3 +35,13 @@ def checkout_information_page(logged_in_page: Page) -> CheckoutInformationPage:
     expect(checkout_information_page.checkout_header).to_be_visible()
 
     return checkout_information_page
+
+@pytest.fixture
+def checkout_overview_page(logged_in_page: Page, checkout_information_page: CheckoutInformationPage) -> CheckoutOverviewPage:
+    checkout_information_page.enter_customer_information("John", "Smith", "07628")
+    checkout_information_page.continue_checkout()
+
+    checkout_overview_page = CheckoutOverviewPage(logged_in_page)
+    expect(checkout_overview_page.checkout_overview_header).to_be_visible()
+
+    return checkout_overview_page

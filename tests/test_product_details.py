@@ -1,6 +1,6 @@
 from playwright.sync_api import expect, Page
 from pages.inventory_page import InventoryPage
-from pages.product_details import ProductDetailsPage
+from pages.product_details_page import ProductDetailsPage
 from urllib.parse import urljoin
 from config import BASE_URL
 import pytest
